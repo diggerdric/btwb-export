@@ -3,15 +3,15 @@ from bs4 import BeautifulSoup
 import re
 
 def login(username, password):
-    login_url = 'https://beyondthewhiteboard.com/signin'
+    login_url = 'https://beyondthewhiteboard.com/session'
     session = requests.Session()
     login_page = session.get(login_url)
     login_soup = BeautifulSoup(login_page.content, 'html.parser')
     authenticity_token = login_soup.find('input', {'name': 'authenticity_token'})['value']
 
     payload = {
-        'user[email]': username,
-        'user[password]': password,
+        'login': username,
+        'password': password,
         'authenticity_token': authenticity_token
     }
 
